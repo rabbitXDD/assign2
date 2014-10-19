@@ -45,10 +45,7 @@ void setup(){
    car2_Speed = random(5,15);
    car3_Speed = random(5,15);
    car4_Speed = random(5,15);
-      print(car1_Speed);
-   print(car2_Speed);
-   print(car3_Speed);
-   print(car4_Speed);
+
   // the Y position of Pond
   pondY = 32;
   
@@ -82,26 +79,26 @@ void setup(){
 
 void draw(){
   switch (gameState){
+   
     case GAME_START:
         background(10,110,16);
         text("Press Enter", width/3, height/2);    
         break;
+    
     case FROG_DIE:
         if(millis()-currentTime >= 1000){
         frogX=frogInitX;
         frogY=frogInitY;
         gameState = GAME_RUN;
-           //determine car speed randomly
-   car1_Speed = random(5,15);
-   car2_Speed = random(5,15);
-   car3_Speed = random(5,15);
-   car4_Speed = random(5,15);
-   print(car1_Speed);
-   print(car2_Speed);
-   print(car3_Speed);
-   print(car4_Speed);
-        }
+           
+        //determine car speed randomly
+        car1_Speed = random(5,15);
+        car2_Speed = random(5,15)
+        car3_Speed = random(5,15);
+        car4_Speed = random(5,15);
+         }
         break;
+    
     case GAME_RUN:
         background(10,110,16);
         
