@@ -39,7 +39,7 @@ void setup(){
   // initial state
   gameState = GAME_START;
   
-  frog_Speed = 20;
+  frog_Speed = 32;
    //determine car speed randomly
    car1_Speed = random(5,15);
    car2_Speed = random(5,15);
