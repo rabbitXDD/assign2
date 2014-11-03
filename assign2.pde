@@ -197,7 +197,7 @@ void draw(){
                currentTime = millis();
                image(imgDeadFrog, frogX, frogY);
                life--;
-               println(life);
+               //println(life);
                gameState = FROG_DIE;
            }             
            
