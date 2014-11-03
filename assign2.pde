@@ -192,7 +192,7 @@ void draw(){
                gameState = FROG_DIE;
            }             
            // car4 hitTest
-                if(frogCX>rightCar2X && frogCX<rightCar2X+32 && frogCY>rightCar2Y && frogCY<rightCar2Y+32)
+                if(frogCX>rightCar2X && frogCX<rightCar2X+48 && frogCY>rightCar2Y && frogCY<rightCar2Y+48)
                 {
                currentTime = millis();
                image(imgDeadFrog, frogX, frogY);
