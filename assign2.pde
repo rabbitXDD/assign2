@@ -93,7 +93,7 @@ void draw(){
            
         //determine car speed randomly
         car1_Speed = random(5,15);
-        car2_Speed = random(5,15)
+        car2_Speed = random(5,15);
         car3_Speed = random(5,15);
         car4_Speed = random(5,15);
          }
