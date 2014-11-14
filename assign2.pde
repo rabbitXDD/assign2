@@ -19,9 +19,10 @@ float car4_Speed;
 
 int life;
 int currentTime = 0;
+int speedLevel;
 
-final int GAME_START = 1;
-final int GAME_WIN = 2;
+final int GAME_START = 1;//final means that GAME_START is a constant and its value won't change
+final int GAME_WIN = 2;  //This is a protecting method.
 final int GAME_LOSE = 3;
 final int GAME_RUN = 4;
 final int FROG_DIE = 5;
@@ -39,12 +40,7 @@ void setup(){
   // initial state
   gameState = GAME_START;
   
-  frog_Speed = 32;
-   //determine car speed randomly
-   car1_Speed = random(5,15);
-   car2_Speed = random(5,15);
-   car3_Speed = random(5,15);
-   car4_Speed = random(5,15);
+  frog_Speed = 20;
 
   // the Y position of Pond
   pondY = 32;
@@ -79,26 +75,25 @@ void setup(){
 
 void draw(){
   switch (gameState){
-   
     case GAME_START:
-        background(10,110,16);
-        text("Press Enter", width/3, height/2);    
+        background(10,110,16);   
+        int spacing = 100;
+        textAlign(CENTER);
+        text("Click level of speed:",width/2,width/3-24);
+        for (int i=1; i<6; i++){
+            fill(50,10,100);
+            rect(i*spacing-10, width/3, spacing, 100);
+            fill(0);
+            text(i, i*spacing+30, width/3+50);
+          }
         break;
-    
     case FROG_DIE:
         if(millis()-currentTime >= 1000){
         frogX=frogInitX;
         frogY=frogInitY;
         gameState = GAME_RUN;
-           
-        //determine car speed randomly
-        car1_Speed = random(5,15);
-        car2_Speed = random(5,15);
-        car3_Speed = random(5,15);
-        car4_Speed = random(5,15);
-         }
+        }
         break;
-    
     case GAME_RUN:
         background(10,110,16);
         
@@ -118,7 +113,45 @@ void draw(){
         // Modify the following code
         // to meet the requirement
         // -------------------------------
-        
+        //determine car speed randomly
+  
+   switch(speedLevel){
+     
+     case 1:
+   car1_Speed = random(0,5);
+   car2_Speed = random(0,5);
+   car3_Speed = random(0,5);
+   car4_Speed = random(0,5);
+   break;
+     case 2:
+   car1_Speed = random(3,10);
+   car2_Speed = random(3,10);
+   car3_Speed = random(3,10);
+   car4_Speed = random(3,10);
+   break;
+     case 3:
+   car1_Speed = random(5,12);
+   car2_Speed = random(5,12);
+   car3_Speed = random(5,12);
+   car4_Speed = random(5,12);
+   break;
+     case 4:
+   car1_Speed = random(10,15);
+   car2_Speed = random(10,15);
+   car3_Speed = random(10,15);
+   car4_Speed = random(10,15);
+   break;
+     case 5:
+   car1_Speed = random(15,20);
+   car2_Speed = random(10,20);
+   car3_Speed = random(5,20);
+   car4_Speed = random(0,20);
+   break;   
+   }
+   //println(car1_Speed);
+   //println(car2_Speed);
+   //println(car3_Speed);
+   //println(car4_Speed);
          //car1 move
          
          leftCar1X += car1_Speed;
@@ -197,7 +230,6 @@ void draw(){
                currentTime = millis();
                image(imgDeadFrog, frogX, frogY);
                life--;
-               //println(life);
                gameState = FROG_DIE;
            }             
            
@@ -215,13 +247,17 @@ void draw(){
         background(0);
         image(imgWinFrog,207,164);
         fill(255);
-        text("You Win !!",240,height/4);
+        textAlign(CENTER);
+        text("You Win !!",width/2,height/5);
+        text("PRESS ENTER TO RESTART",width/2,height/5+40);
         break;
     case GAME_LOSE:
         background(0);
         image(imgLoseFrog,189,160);
         fill(255);
-        text("You Lose",240,height/4); 
+        textAlign(CENTER);
+        text("You Lose",width/2,height/5); 
+        text("PRESS ENTER TO RESTART",width/2,height/5+40);
         break;
   }
 }
@@ -246,12 +282,27 @@ void keyPressed() {
           break;
       }
   }
-  if(key==ENTER && (gameState == GAME_START||gameState == GAME_WIN||gameState == GAME_LOSE)){
-      gameState = GAME_RUN;
+  if(key==ENTER && (gameState == GAME_WIN||gameState == GAME_LOSE)){
+      gameState = GAME_START;
       life=3;
       frogX = frogInitX;
       frogY = frogInitY;
     }
+}
+
+void mouseClicked(){
+  if ( gameState == GAME_START &&
+       mouseY > width/3 && mouseY < width/3+100){
+       // select 1~9
+       //int num = int(mouseX / (float)width*9) + 1;
+       int speed = (int)map(mouseX, 90, 590, 0, 5) + 1;
+        speedLevel = speed;
+        
+        life=3;
+        frogX = frogInitX;
+        frogY = frogInitY;
+        gameState = GAME_RUN;
+       }
 }
 
     
